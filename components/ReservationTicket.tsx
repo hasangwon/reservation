@@ -13,7 +13,7 @@ export default function ReservationTicket({ doc }: { doc: DailyType }) {
     else if (doc.purpose === "수술 예약") setPurposeColor("bg-[#ffd0d0]");
     else if (doc.purpose === "진료 예약") setPurposeColor("bg-[#ffe0aa]");
     else if (doc.purpose === "기타 예약") setPurposeColor("bg-secondary-dark");
-  }, []);
+  }, [doc.purpose]);
 
   return (
     <div className="relative group border-t py-4">
