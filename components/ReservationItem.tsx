@@ -28,7 +28,7 @@ const ReservationItem = ({
       key={id}
       className={`${backgroundColor} h-5 rounded-[0.625rem] flex items-center justify-center m-1  `}
     >
-      <span className="text-[0.625rem] text=[#4d4f5c] font-normal px-3">
+      <span className="text-[0.625rem] text-[#4d4f5c] font-normal px-3">
         {petName}
       </span>
     </div>

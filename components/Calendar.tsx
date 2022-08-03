@@ -48,6 +48,9 @@ const Calendar = () => {
     });
   };
 
+  console.log(today);
+  console.log(wed);
+
   return (
     <>
       <div className="m-10 flex items-center h-12">
@@ -93,6 +96,16 @@ const Calendar = () => {
                         {DAYS[index].day}
                       </span>
                     </div>
+                    {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
+                      <div className="absolute">
+                        <div className="mt-3 w-[9.1rem]">
+                          <div className="text-xs text-[#6c5ce7]">Today</div>
+                          <div className="border-b-[0.188rem] border-[#6C5CE7]"></div>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </td>
                 );
               })}
