@@ -11,7 +11,7 @@ export interface DailyType {
 }
 export default function Aside() {
   return (
-    <div className="w-[25rem] h-[50rem] m-[3.5rem] p-[1.625rem] bg-white text-neutral-dark rounded-2xl shadow">
+    <div className="w-[25rem] h-full p-[1.625rem] overflow-hidden bg-white text-neutral-dark rounded-2xl shadow ">
       {/* 선택 */}
       <div className="text-[1.25rem] ">
         <span className="pb-4 border-b-[0.1875rem] border-neutral-dark">당일 예약 리스트</span>
