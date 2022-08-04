@@ -54,7 +54,7 @@ const Calendar = () => {
   return (
     <>
       <div className="m-10 flex items-center h-12">
-        <button className=" w-[6.125rem] h-12 shadow-md rounded-3xl mx-3">
+        <button className=" w-[6.125rem] h-12 shadow-md rounded-3xl mx-3 bg-white">
           <div className="flex my-3.5 mx-5">
             <Image
               src="/images/calendar_icon.png"
@@ -79,7 +79,20 @@ const Calendar = () => {
         </div>
         <div className="text-3xl text-[#4E515D] mx-3">{getMonth()}</div>
       </div>
-      <div className="shadow-md m-10 rounded-2xl w-[67.806rem] bg-white">
+      <div className="shadow-md m-10 rounded-2xl w-[67.806rem] bg-white flex">
+        <div>
+          <div className="h-[4.688rem]"></div>
+          {TIME.map((time) => {
+            return (
+              <div
+                key={time.id}
+                className="font-normal text-[0.625rem] text-[#808495] align-top w-[2.3rem] h-[3.75rem] ml-3"
+              >
+                {time.time}
+              </div>
+            );
+          })}
+        </div>
         <table className="w-[67.806rem] h-[53.983rem]">
           <tbody>
             <tr>
@@ -88,11 +101,13 @@ const Calendar = () => {
                 return (
                   <td
                     key={DAYS[index].id}
-                    className="h-20 w-32 text-center border-b border-l border-solid border-gray-200"
+                    className="h-20 w-32 text-center border-b border-l border-solid border-[#e9e9f0]"
                   >
                     <div>
-                      <span className=" mr-2 text-base">{day.get("date")}</span>
-                      <span className="text-[#BBBBC6] font-normal text-sm">
+                      <span className=" mr-2 text-sm text-[#4d4f5c]">
+                        {day.get("date")}
+                      </span>
+                      <span className="text-[#b0aebc] font-normal text-sm">
                         {DAYS[index].day}
                       </span>
                     </div>
@@ -113,13 +128,13 @@ const Calendar = () => {
             {TIME.map((time) => {
               return (
                 <tr key={time.id} className="h-[3.625rem]">
-                  <th className="border-solid border-gray-200 border-r font-thin text-[0.625rem] text-[#AAADB8] align-top w-[2.713rem]">
-                    {time.time}
+                  <th className="border-solid border-[#e9e9f0] border-r font-thin text-[0.625rem] text-[#AAADB8] align-top w-0">
+                    {/* {time.time} */}
                   </th>
                   {days.map((day, i) => {
                     return (
                       <th
-                        className="boreder-solid border-gray-200 border-l border-t"
+                        className="boreder-solid border-[#e9e9f0] border-l border-t"
                         key={i}
                       >
                         <div className="flex w-[8rem] flex-wrap">
