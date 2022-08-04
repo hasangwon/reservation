@@ -1,12 +1,9 @@
-import type { NextPage } from "next";
-import Calendar from "../components/Calendar";
+import Aside from "../components/Aside";
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
-    <div className="bg-[#f5f8ff]">
-      <Calendar />
+    <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem]">
+      <Aside />
     </div>
   );
-};
-
-export default Home;
+}
