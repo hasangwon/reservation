@@ -39,7 +39,7 @@ export default function ReservationTicket({ doc }: { doc: DailyType }) {
         </div>
       </div>
       {/* 예약 변경 버튼 */}
-      <div className="absolute right-3 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem]">예약 변경</div>
+      <div className="absolute right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem]">예약 변경</div>
       {/* 예약 삭제 버튼 */}
       <div className="absolute top-6 right-7 hidden group-hover:block w-4 h-auto">
         <Image src={Delete} alt="delete" />
