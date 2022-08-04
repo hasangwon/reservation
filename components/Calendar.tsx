@@ -35,6 +35,19 @@ const Calendar = () => {
     }
   };
 
+  const clickTodayButton = () => {
+    setSelectedDate(today.format("YYYY-DD-MM"));
+    setDays([
+      startDay,
+      startDay.add(1, "day"),
+      startDay.add(2, "day"),
+      startDay.add(3, "day"),
+      startDay.add(4, "day"),
+      startDay.add(5, "day"),
+      startDay.add(6, "day"),
+    ]);
+  };
+
   const goToLastWeek = () => {
     setDays((days) => {
       return days.map((day) => day.subtract(7, "day"));
@@ -47,6 +60,8 @@ const Calendar = () => {
     });
   };
 
+  console.log(selectedDate);
+
   return (
     <>
       <div className="m-10 flex items-center h-12">
@@ -58,7 +73,12 @@ const Calendar = () => {
               width={20}
               height={20}
             />
-            <div className="text-[#7165DB] mx-[0.313rem] font-normal">오늘</div>
+            <div
+              className="text-[#7165DB] mx-[0.313rem] font-normal"
+              onClick={clickTodayButton}
+            >
+              오늘
+            </div>
           </div>
         </button>
         <div className="mx-3">
