@@ -22,9 +22,8 @@ const Calendar = () => {
   const [days, setDays] = useState([sun, mon, tue, wed, thu, fri, sat]);
 
   const [thisDate, setThisDate] = useState(today);
-  const [selected, setSelected] = useState(false);
-  const [className, setClassName] = useState("");
   const [purpose, setPurpose] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
 
   const getMonth = () => {
     if (days[0].get("year") !== days[6].get("year")) {
@@ -47,9 +46,6 @@ const Calendar = () => {
       return days.map((day) => day.add(7, "day"));
     });
   };
-
-  console.log(today);
-  console.log(wed);
 
   return (
     <>
@@ -102,15 +98,37 @@ const Calendar = () => {
                   <td
                     key={DAYS[index].id}
                     className="h-20 w-32 text-center border-b border-l border-solid border-[#e9e9f0]"
+                    onClick={() => {
+                      setSelectedDate(day.format("YYYY-MM-DD"));
+                    }}
                   >
-                    <div>
-                      <span className=" mr-2 text-sm text-[#4d4f5c]">
+                    <button
+                      value={index}
+                      className={
+                        selectedDate === day.format("YYYY-MM-DD")
+                          ? "w-[3.25rem] h-[1.625rem] bg-[#6c5ce7] rounded-[0.313rem]"
+                          : ""
+                      }
+                    >
+                      <span
+                        className={
+                          selectedDate === day.format("YYYY-MM-DD")
+                            ? "mr-2 text-sm text-white"
+                            : "mr-2 text-sm text-[#4d4f5c]"
+                        }
+                      >
                         {day.get("date")}
                       </span>
-                      <span className="text-[#b0aebc] font-normal text-sm">
+                      <span
+                        className={
+                          selectedDate === day.format("YYYY-MM-DD")
+                            ? "text-white font-normal text-sm"
+                            : "text-[#b0aebc] font-normal text-sm"
+                        }
+                      >
                         {DAYS[index].day}
                       </span>
-                    </div>
+                    </button>
                     {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
                       <div className="absolute">
                         <div className="mt-3 w-[9.1rem]">
