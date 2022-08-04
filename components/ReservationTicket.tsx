@@ -3,9 +3,9 @@ import Image from "next/image";
 import Dog from "../public/images/dog.png";
 import Cat from "../public/images/cat.png";
 import Delete from "../public/images/delete.png";
-import { DailyType } from "./Aside";
+import { DailyDataType } from "../pages";
 
-export default function ReservationTicket({ doc }: { doc: DailyType }) {
+export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
   const [purposeColor, setPurposeColor] = useState("");
   useEffect(() => {
     if (doc.purpose === "미용 예약") setPurposeColor("bg-[#eadefd]");
