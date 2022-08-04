@@ -18,12 +18,12 @@ const Calendar = () => {
   let thu = startDay.add(4, "day");
   let fri = startDay.add(5, "day");
   let sat = startDay.add(6, "day");
-
+  ///
   const [days, setDays] = useState([sun, mon, tue, wed, thu, fri, sat]);
 
   const [thisDate, setThisDate] = useState(today);
   const [purpose, setPurpose] = useState([]);
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState("");
 
   const getMonth = () => {
     if (days[0].get("year") !== days[6].get("year")) {
@@ -176,20 +176,28 @@ const Calendar = () => {
                         key={i}
                       >
                         <div className="flex w-[8rem] flex-wrap">
-                          {RESERVATION.map((res): any => {
-                            if (
-                              res.date === day.format("YYYY-MM-DD") &&
-                              res.time === time.time
-                            ) {
-                              return (
-                                <ReservationItem
-                                  purpose={res.purpose}
-                                  id={res.id}
-                                  petName={res.pet_name}
-                                />
-                              );
+                          {RESERVATION.map(
+                            (res: {
+                              id: number;
+                              time: string;
+                              date: string;
+                              pet_name: string;
+                              purpose: string;
+                            }) => {
+                              if (
+                                res.date === day.format("YYYY-MM-DD") &&
+                                res.time === time.time
+                              ) {
+                                return (
+                                  <ReservationItem
+                                    purpose={res.purpose}
+                                    id={res.id}
+                                    petName={res.pet_name}
+                                  />
+                                );
+                              }
                             }
-                          })}
+                          )}
                         </div>
                       </th>
                     );
