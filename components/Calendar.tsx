@@ -1,123 +1,23 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import ReservationItem from "./ReservationItem";
-import { deflateRawSync } from "zlib";
 
-const Calendar = () => {
-  let today = dayjs();
-  let todayNumber = dayjs().get("day");
-  let startDay = today.subtract(todayNumber, "day");
-  // let endDay = startDay.add(6, "day");
-  let sun = startDay;
-  let mon = startDay.add(1, "day");
-  let tue = startDay.add(2, "day");
-  let wed = startDay.add(3, "day");
-  let thu = startDay.add(4, "day");
-  let fri = startDay.add(5, "day");
-  let sat = startDay.add(6, "day");
-  ///
-  const [days, setDays] = useState([sun, mon, tue, wed, thu, fri, sat]);
-
+const Calendar = ({ today, days, selectedDate, setSelectedDate }) => {
   const [thisDate, setThisDate] = useState(today);
   const [purpose, setPurpose] = useState([]);
-  const [selectedDate, setSelectedDate] = useState("");
-
-  const getMonth = () => {
-    if (days[0].get("year") !== days[6].get("year")) {
-      return days[0].format("YYYY.MM") + " ~ " + days[6].format("YYYY.MM");
-    } else if (days[0].get("month") !== days[6].get("month")) {
-      return days[0].format("YYYY.MM") + " ~ " + days[6].format("MM");
-    } else {
-      return days[0].format("YYYY.MM");
-    }
-  };
-
-  const clickTodayButton = () => {
-    setSelectedDate(today.format("YYYY-DD-MM"));
-    setDays([
-      startDay,
-      startDay.add(1, "day"),
-      startDay.add(2, "day"),
-      startDay.add(3, "day"),
-      startDay.add(4, "day"),
-      startDay.add(5, "day"),
-      startDay.add(6, "day"),
-    ]);
-  };
-
-  const goToLastWeek = () => {
-    setDays((days) => {
-      return days.map((day) => day.subtract(7, "day"));
-    });
-  };
-
-  const goToNextWeek = () => {
-    setDays((days) => {
-      return days.map((day) => day.add(7, "day"));
-    });
-  };
-
-  console.log(selectedDate);
 
   return (
-    <>
-      <div className="m-10 flex items-center h-12">
-        <button className=" w-[6.125rem] h-12 shadow-md rounded-3xl mx-3 bg-white">
-          <div className="flex my-3.5 mx-5">
-            <Image
-              src="/images/calendar_icon.png"
-              alt="아이콘"
-              width={20}
-              height={20}
-            />
-            <div
-              className="text-[#7165DB] mx-[0.313rem] font-normal"
-              onClick={clickTodayButton}
-            >
-              오늘
-            </div>
-          </div>
-        </button>
-        <div className="mx-3">
-          <FontAwesomeIcon
-            icon={faAngleLeft}
-            className="mr-[0.7rem] text-[#4E515D]"
-            onClick={goToLastWeek}
-          />
-          <FontAwesomeIcon
-            icon={faAngleRight}
-            className="ml-[0.7rem] text-[#4E515D]"
-            onClick={goToNextWeek}
-          />
-        </div>
-        <div className="text-3xl text-[#4E515D] mx-3">{getMonth()}</div>
-      </div>
-      <div className="shadow-md m-10 rounded-2xl w-[67.806rem] bg-white flex">
-        <div>
-          <div className="h-[4.688rem]"></div>
-          {TIME.map((time) => {
-            return (
-              <div
-                key={time.id}
-                className="font-normal text-[0.625rem] text-[#808495] align-top w-[2.3rem] h-[3.75rem] ml-3"
-              >
-                {time.time}
-              </div>
-            );
-          })}
-        </div>
-        <table className="w-[67.806rem] h-[53.983rem]">
+    <div className="shadow-md rounded-2xl w-full h-full bg-white flex flex-col  overflow-y-scroll">
+      <div>
+        <table className="w-[67.806rem]">
           <tbody>
             <tr>
-              <td></td>
-              {days.map((day, index) => {
+              <td className="w-[2.27rem] h-[5rem]"></td>
+              {days.map((day, index: number) => {
                 return (
                   <td
                     key={DAYS[index].id}
-                    className="h-20 w-32 text-center border-b border-l border-solid border-[#e9e9f0]"
+                    className="w-[9.175rem] text-center border-l border-solid border-[#e9e9f0]"
                     onClick={() => {
                       setSelectedDate(day.format("YYYY-MM-DD"));
                     }}
@@ -150,8 +50,8 @@ const Calendar = () => {
                       </span>
                     </button>
                     {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
-                      <div className="absolute">
-                        <div className="mt-3 w-[9.1rem]">
+                      <div className="relative">
+                        <div className="w-[9.25rem] absolute top-[10px]">
                           <div className="text-xs text-[#6c5ce7]">Today</div>
                           <div className="border-b-[0.188rem] border-[#6C5CE7]"></div>
                         </div>
@@ -163,19 +63,27 @@ const Calendar = () => {
                 );
               })}
             </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="h-full overflow-y-scroll">
+        <table className="w-[67.806rem]">
+          <tbody>
             {TIME.map((time) => {
               return (
-                <tr key={time.id} className="h-[3.625rem]">
-                  <th className="border-solid border-[#e9e9f0] border-r font-thin text-[0.625rem] text-[#AAADB8] align-top w-0">
-                    {/* {time.time} */}
+                <tr key={time.id}>
+                  <th className="font-normal text-[0.625rem] text-[#808495] align-top w-[2.3rem] h-[3.75rem] ml-3">
+                    {time.time}
                   </th>
                   {days.map((day, i) => {
                     return (
+                      //높이에 고정값을 주면 align-start 적용이 가능하지만 그러면 반응형은...?
                       <th
-                        className="boreder-solid border-[#e9e9f0] border-l border-t"
+                        className="border-solid border-[#e9e9f0] border-l border-t"
                         key={i}
                       >
-                        <div className="flex w-[8rem] flex-wrap">
+                        <div className="flex w-[8rem] h-[3.75rem] flex-wrap items-start">
                           {RESERVATION.map(
                             (res: {
                               id: number;
@@ -184,6 +92,7 @@ const Calendar = () => {
                               pet_name: string;
                               purpose: string;
                             }) => {
+                              let arr = [];
                               if (
                                 res.date === day.format("YYYY-MM-DD") &&
                                 res.time === time.time
@@ -208,7 +117,7 @@ const Calendar = () => {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -223,19 +132,30 @@ const DAYS: { id: number; day: string }[] = [
 ];
 
 const TIME = [
-  { id: 1, time: "06:00" },
-  { id: 2, time: "07:00" },
-  { id: 3, time: "08:00" },
-  { id: 4, time: "09:00" },
-  { id: 5, time: "10:00" },
-  { id: 6, time: "11:00" },
-  { id: 7, time: "12:00" },
-  { id: 8, time: "13:00" },
-  { id: 9, time: "14:00" },
-  { id: 10, time: "15:00" },
-  { id: 11, time: "16:00" },
-  { id: 12, time: "17:00" },
-  { id: 13, time: "18:00" },
+  { id: 1, time: "00:00" },
+  { id: 2, time: "01:00" },
+  { id: 3, time: "02:00" },
+  { id: 4, time: "03:00" },
+  { id: 5, time: "04:00" },
+  { id: 6, time: "05:00" },
+  { id: 7, time: "06:00" },
+  { id: 8, time: "07:00" },
+  { id: 9, time: "08:00" },
+  { id: 10, time: "09:00" },
+  { id: 11, time: "10:00" },
+  { id: 12, time: "11:00" },
+  { id: 13, time: "12:00" },
+  { id: 14, time: "13:00" },
+  { id: 15, time: "14:00" },
+  { id: 16, time: "15:00" },
+  { id: 17, time: "16:00" },
+  { id: 18, time: "17:00" },
+  { id: 19, time: "18:00" },
+  { id: 20, time: "19:00" },
+  { id: 21, time: "20:00" },
+  { id: 22, time: "21:00" },
+  { id: 23, time: "22:00" },
+  { id: 24, time: "23:00" },
 ];
 
 const RESERVATION: {
@@ -307,6 +227,13 @@ const RESERVATION: {
     date: "2022-07-30",
     pet_name: "해피",
     purpose: "기타 예약",
+  },
+  {
+    id: 10,
+    time: "13:00",
+    date: "2022-08-05",
+    pet_name: "꼬미",
+    purpose: "진료 예약",
   },
 ];
 
