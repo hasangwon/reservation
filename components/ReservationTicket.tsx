@@ -6,20 +6,20 @@ import Delete from "../public/images/delete.png";
 import { DailyDataType } from "../pages";
 
 export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
-  const [purposeColor, setPurposeColor] = useState("");
+  const [typeSetting, setTypeSetting] = useState({ color: "", type: "" });
   useEffect(() => {
-    if (doc.purpose === "미용 예약") setPurposeColor("bg-[#eadefd]");
-    else if (doc.purpose === "접종 예약") setPurposeColor("bg-[#cdf2c8]");
-    else if (doc.purpose === "수술 예약") setPurposeColor("bg-[#ffd0d0]");
-    else if (doc.purpose === "진료 예약") setPurposeColor("bg-[#ffe0aa]");
-    else if (doc.purpose === "기타 예약") setPurposeColor("bg-secondary-dark");
-  }, [doc.purpose]);
+    if (doc.type === "beauty") setTypeSetting({ color: "bg-[#eadefd]", type: "미용 예약" });
+    else if (doc.type === "vaccine") setTypeSetting({ color: "bg-[#cdf2c8]", type: "접종 예약" });
+    else if (doc.type === "operation") setTypeSetting({ color: "bg-[#ffd0d0]", type: "수술 예약" });
+    else if (doc.type === "consulting") setTypeSetting({ color: "bg-[#ffe0aa]", type: "진료 예약" });
+    else if (doc.type === "etc") setTypeSetting({ color: "bg-secondary-dark", type: "기타 예약" });
+  }, [doc.type]);
 
   return (
     <div className="relative group border-t py-4">
       {/* 예약 강아지/고양이 정보 */}
       <div className="flex items-center">
-        <span className={`${purposeColor} mr-4 rounded-md px-[0.5rem] py-[0.3125rem] text-[0.8125rem]`}>{doc.purpose}</span>
+        <span className={`${typeSetting.color} mr-4 rounded-md px-[0.5rem] py-[0.3125rem] text-[0.8125rem]`}>{typeSetting.type}</span>
         <div className="inline-block w-6 mt-[0.6rem] mr-[0.7rem]">{doc.animal === "dog" ? <Image src={Dog} alt="dog" /> : <Image src={Cat} alt="cat" />}</div>
         <span className="text-[1rem] font-normal">{doc.pet_name}</span>
       </div>
@@ -39,7 +39,9 @@ export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
         </div>
       </div>
       {/* 예약 변경 버튼 */}
-      <div className="absolute right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem]">예약 변경</div>
+      <div className="absolute right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem] select-none" onClick={() => alert(doc.id)}>
+        예약 변경
+      </div>
       {/* 예약 삭제 버튼 */}
       <div className="absolute top-6 right-7 hidden group-hover:block w-4 h-auto">
         <Image src={Delete} alt="delete" />
