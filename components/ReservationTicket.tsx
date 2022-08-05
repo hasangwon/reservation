@@ -16,7 +16,7 @@ export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
   }, [doc.type]);
 
   return (
-    <div className="relative group border-t py-4">
+    <div className="relative group border-t py-4 mx-6 px-2">
       {/* 예약 강아지/고양이 정보 */}
       <div className="flex items-center">
         <span className={`${typeSetting.color} mr-4 rounded-md px-[0.5rem] py-[0.3125rem] text-[0.8125rem]`}>{typeSetting.type}</span>
@@ -37,11 +37,13 @@ export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
           <span className=" text-neutral-light">Date</span>
           <span>{doc.visit_date}</span>
         </div>
+        <div className="flex-1" />
+        <div className="right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem] select-none" onClick={() => alert(doc.id)}>
+          예약 변경
+        </div>
       </div>
       {/* 예약 변경 버튼 */}
-      <div className="absolute right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem] select-none" onClick={() => alert(doc.id)}>
-        예약 변경
-      </div>
+
       {/* 예약 삭제 버튼 */}
       <div className="absolute top-6 right-7 hidden group-hover:block w-4 h-auto">
         <Image src={Delete} alt="delete" />

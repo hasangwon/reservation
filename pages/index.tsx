@@ -49,11 +49,11 @@ export default function Home() {
     REAL_DATA.forEach((doc) => setTest((ticket) => [...ticket, doc]));
   }, []);
 
-  console.log("test", test);
-
   return (
     <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem]">
-      <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <div>
+        <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      </div>
     </div>
   );
 }
