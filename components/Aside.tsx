@@ -1,44 +1,61 @@
+import { Dispatch, SetStateAction, useState } from "react";
+import dayjs from "dayjs";
 import ReservationTicket from "./ReservationTicket";
-export interface DailyType {
-  id: number;
-  pet_name: string;
-  animal: string;
-  purpose: string;
-  visit_date: string;
-  visit_time: string;
-  owner_name: string;
-  owner_phone: string;
+import VetfluxDatePicker from "./VetfluxDatePicker";
+import Image from "next/image";
+import Down from "../public/images/down.png";
+import { DailyDataType } from "../pages";
+
+export interface AsidePropsType {
+  dailyData: DailyDataType[];
+  selectedDate: string;
+  setSelectedDate: Dispatch<SetStateAction<string>>;
 }
-export default function Aside() {
+
+export default function Aside({ dailyData, selectedDate, setSelectedDate }: AsidePropsType) {
+  const [isOpenPicker, setIsOpenPicker] = useState<boolean>(false);
+  const [defaultTime, setDefaultTime] = useState(dayjs().valueOf());
+  const className = "";
+
+  const handleDateData = (millisecond: number) => {
+    setSelectedDate(dayjs(millisecond).format("YYYY-MM-DD"));
+    setDefaultTime(millisecond);
+    setIsOpenPicker(false);
+  };
+
+  const handleDatePickerCancel = () => {
+    setIsOpenPicker(false);
+  };
+
+  const handlePicker = () => {
+    setIsOpenPicker(!isOpenPicker);
+  };
+
   return (
-    <div className="w-[25rem] flex flex-col h-full p-[1.625rem] bg-white text-neutral-dark rounded-2xl shadow">
-      {/* 선택 */}
-      <div className="text-[1.25rem] ">
-        <span className="pb-4 border-b-[0.1875rem] border-neutral-dark">당일 예약 리스트</span>
+    <div className="flex flex-col w-full h-full pb-4 bg-white text-neutral-dark rounded-2xl shadow">
+      {/* 메뉴얼 */}
+      <div className="text-[1.25rem] pt-[1.625rem] px-[1.625rem]">
+        <span className="pb-4 border-b-[0.1875rem] border-neutral-dark select-none">예약 리스트</span>
       </div>
 
       {/* 데이트 피커 */}
-      <div className="mt-12 mb-[1.625rem] w-[25rem]">datepicker</div>
+      <div className="mt-12 mb-[1.625rem] min-w-[25rem] px-[1.625rem] select-none">
+        <div className="flex justify-between items-center	w-[8.75rem] h-[2rem] mb-[0.125rem] px-[0.75rem] text-[0.8125rem] text-neutral-dark border border-secondary-dark shadow" onClick={handlePicker}>
+          <span className="inline-block">{selectedDate ? selectedDate : "날짜 선택"}</span>
+          <span className="inline-block w-[1.25rem] h-auto mt-[0.25rem] mr-[-0.25rem]">
+            <Image src={Down} alt="down" />
+          </span>
+        </div>
+        {isOpenPicker && <VetfluxDatePicker datePickRangeOptions="normal" handleDatePickerCancel={handleDatePickerCancel} handleDateData={handleDateData} className={className} defaultTime={defaultTime} />}
+      </div>
 
       {/* 예약 티켓 공간 */}
       <div className="h-full overflow-y-scroll">
         {/* 티켓 1개 */}
-        {DAILY_DATA_TEST.map((doc: DailyType) => {
+        {dailyData.map((doc: DailyDataType) => {
           return <ReservationTicket key={doc.id} doc={doc} />;
         })}
       </div>
     </div>
   );
 }
-
-const DAILY_DATA_TEST = [
-  { id: 1, pet_name: "크림", animal: "dog", purpose: "접종 예약", visit_date: "2022.08.02", visit_time: "07:00", owner_name: "하상원", owner_phone: "01098743299" },
-
-  { id: 2, pet_name: "우유", animal: "cat", purpose: "미용 예약", visit_date: "2022.08.02", visit_time: "09:00", owner_name: "우혜림", owner_phone: "01042311323" },
-
-  { id: 3, pet_name: "당근", animal: "cat", purpose: "수술 예약", visit_date: "2022.08.02", visit_time: "11:00", owner_name: "이범석", owner_phone: "01014536345" },
-
-  { id: 4, pet_name: "튀김", animal: "dog", purpose: "기타 예약", visit_date: "2022.08.02", visit_time: "14:00", owner_name: "조현우", owner_phone: "01023422343" },
-
-  { id: 5, pet_name: "고로케", animal: "dog", purpose: "진료 예약", visit_date: "2022.08.02", visit_time: "19:00", owner_name: "박상우", owner_phone: "01067223299" },
-];
