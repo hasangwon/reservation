@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import Aside from "../components/Aside";
+import Header from "../components/Header";
+import Calendar from "../components/Calendar";
+import dayjs from "dayjs";
+import CalendarContainer from "../components/CalendarContainer";
 
 export interface DailyDataType {
   id: number;
@@ -51,9 +55,10 @@ export default function Home() {
 
   return (
     <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem]">
-      <div>
-        <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      </div>
+      <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <div className="ml-20 w-full h-full">
+        <CalendarContainer />
+  </div>
     </div>
   );
 }
