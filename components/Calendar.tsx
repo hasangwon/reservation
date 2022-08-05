@@ -20,12 +20,12 @@ const Calendar = ({
   const [purpose, setPurpose] = useState([]);
 
   return (
-    <div className="shadow-md rounded-2xl w-full h-full bg-white flex flex-col  overflow-y-scroll">
-      <div>
-        <table className="w-[67.806rem]">
-          <tbody>
+    <div className="shadow-md rounded-2xl w-full h-full bg-white flex flex-col overflow-y-scroll">
+      <div className="h-full">
+        <table className="w-full h-full">
+          <thead className="sticky top-0 bg-white">
             <tr>
-              <td className="w-[2.3rem] h-[5rem]"></td>
+              <td className="h-[5rem] "></td>
               {days.map((day: {}, index: number) => {
                 return (
                   <td
@@ -64,7 +64,7 @@ const Calendar = ({
                     </button>
                     {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
                       <div className="relative">
-                        <div className="w-[9.25rem] absolute top-[1.7rem]">
+                        <div className="w-full absolute top-[1.7rem]">
                           <div className="text-xs text-[#6c5ce7]">Today</div>
                           <div className="border-b-[0.188rem] border-[#6C5CE7]"></div>
                         </div>
@@ -76,12 +76,8 @@ const Calendar = ({
                 );
               })}
             </tr>
-          </tbody>
-        </table>
-      </div>
+          </thead>
 
-      <div className="h-full overflow-y-scroll scrollbar-hide">
-        <table className="w-[67.806rem]">
           <tbody>
             {TIME.map((time) => {
               return (

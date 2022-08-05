@@ -34,7 +34,7 @@ const CalendarContainer = () => {
     ]);
   };
   return (
-    <div className="ml-10 h-full flex flex-col">
+    <div className="w-full h-full flex flex-col">
       <Header
         days={days}
         setDays={setDays}

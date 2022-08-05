@@ -27,13 +27,15 @@ const ReservationContainer = ({ day, time }: propsType) => {
               res.time === time.time
             ) {
               arr.push(res);
-              return (
-                <ReservationItem
-                  purpose={res.purpose}
-                  id={res.id}
-                  petName={res.pet_name}
-                />
-              );
+              if (arr.length < 4) {
+                return (
+                  <ReservationItem
+                    purpose={res.purpose}
+                    id={res.id}
+                    petName={res.pet_name}
+                  />
+                );
+              }
             }
           }
         )}
@@ -127,6 +129,13 @@ const RESERVATION: {
     date: "2022-08-05",
     pet_name: "꼬미",
     purpose: "진료 예약",
+  },
+  {
+    id: 11,
+    time: "13:00",
+    date: "2022-08-05",
+    pet_name: "뽀삐",
+    purpose: "기타 예약",
   },
 ];
 
