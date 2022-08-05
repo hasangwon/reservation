@@ -1,11 +1,11 @@
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import { useEffect, useState } from "react";
 
 import ReservationContainer from "./ReservationContainer";
 
 interface propsType {
-  today: {};
-  days: [];
+  today: Dayjs;
+  days: Dayjs[];
   selectedDate: string;
   setSelectedDate: any;
 }
@@ -26,7 +26,7 @@ const Calendar = ({
           <thead className="sticky top-0 bg-white">
             <tr>
               <td className="h-[5rem] "></td>
-              {days.map((day: {}, index: number) => {
+              {days.map((day: Dayjs, index: number) => {
                 return (
                   <td
                     key={DAYS[index].id}

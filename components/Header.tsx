@@ -1,10 +1,14 @@
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import Image from "next/image";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
-const Header = ({ days, setDays, clickTodayButton }) => {
+interface propsTypes {
+  days: Dayjs[];
+  setDays: any;
+  clickTodayButton: () => void;
+}
+const Header = ({ days, setDays, clickTodayButton }: propsTypes) => {
   const getMonth = () => {
     if (days[0].get("year") !== days[6].get("year")) {
       return days[0].format("YYYY.MM") + " ~ " + days[6].format("YYYY.MM");
@@ -16,13 +20,13 @@ const Header = ({ days, setDays, clickTodayButton }) => {
   };
 
   const goToLastWeek = () => {
-    setDays((days) => {
+    setDays((days: any[]) => {
       return days.map((day) => day.subtract(7, "day"));
     });
   };
 
   const goToNextWeek = () => {
-    setDays((days) => {
+    setDays((days: any[]) => {
       return days.map((day) => day.add(7, "day"));
     });
   };

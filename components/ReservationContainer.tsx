@@ -2,14 +2,21 @@ import { prototype } from "stream";
 import ReservationItem from "./ReservationItem";
 import { useEffect } from "react";
 import { ImageError } from "next/dist/server/image-optimizer";
+import {Dayjs} from "dayjs";
 
 interface propsType {
-  day: {};
+  day: Dayjs;
   time: { id: number; time: string };
 }
 
 const ReservationContainer = ({ day, time }: propsType) => {
-  let arr: [] = [];
+  let arr: {
+    id: number;
+    time: string;
+    date: string;
+    pet_name: string;
+    purpose: string;
+  }[] = [];
 
   return (
     <div className="flex justify-between w-full h-full p-2">

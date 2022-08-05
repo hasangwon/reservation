@@ -1,6 +1,6 @@
 import Calendar from "./Calendar";
 import Header from "./Header";
-import dayjs from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ const CalendarContainer = () => {
   let thu = startDay.add(4, "day");
   let fri = startDay.add(5, "day");
   let sat = startDay.add(6, "day");
-  const [days, setDays] = useState<{}[]>([sun, mon, tue, wed, thu, fri, sat]);
+  const [days, setDays] = useState<Dayjs[]>([sun, mon, tue, wed, thu, fri, sat]);
   const [selectedDate, setSelectedDate] = useState<string>("");
 
   const clickTodayButton = () => {
