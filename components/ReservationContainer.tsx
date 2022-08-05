@@ -12,8 +12,8 @@ const ReservationContainer = ({ day, time }: propsType) => {
   let arr: [] = [];
 
   return (
-    <div className="flex justify-between w-[9rem]">
-      <div className="flex w-[8rem] h-[3.75rem] flex-wrap items-start">
+    <div className="flex justify-between w-full h-full p-2">
+      <div className="flex h-[3.75rem] flex-wrap items-start">
         {RESERVATION.map(
           (res: {
             id: number;

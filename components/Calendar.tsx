@@ -82,7 +82,7 @@ const Calendar = ({
             {TIME.map((time) => {
               return (
                 <tr key={time.id}>
-                  <th className="font-normal text-[0.625rem] text-[#808495] align-top w-[2.3rem] h-[3.75rem] ml-3">
+                  <th className="w-[5%] font-normal text-[0.625rem] text-[#808495] align-top h-[5rem]">
                     {time.time}
                   </th>
                   {days.map((day, i) => {

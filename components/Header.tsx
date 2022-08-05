@@ -31,17 +31,17 @@ const Header = ({ days, setDays, clickTodayButton }) => {
     <div className="flex w-full justify-between">
       <div className="flex items-center h-12 mb-10">
         <button
-          className=" w-[6.125rem] h-12 shadow-md rounded-3xl mr-3 bg-white"
+          className="shadow-md rounded-3xl mr-3 bg-white py-3"
           onClick={clickTodayButton}
         >
-          <div className="flex my-3.5 mx-5">
+          <div className="flex mx-5">
             <Image
               src="/images/calendar_icon.png"
               alt="아이콘"
-              width={20}
-              height={20}
+              width={21}
+              height={17}
             />
-            <div className="text-[#7165DB] mx-[0.313rem] font-normal">오늘</div>
+            <div className="text-[#7165DB] ml-3 font-normal">오늘</div>
           </div>
         </button>
         <div className="mx-3">
@@ -58,7 +58,7 @@ const Header = ({ days, setDays, clickTodayButton }) => {
         </div>
         <div className="text-3xl text-[#4E515D] mx-3">{getMonth()}</div>
       </div>
-      <button className="mx-5 w-[8.75rem] h-12 bg-[#6c5ce7] text-white rounded-md">
+      <button className="w-[8.75rem] h-12 bg-[#6c5ce7] text-white rounded-md shadow">
         + 새 예약 만들기
       </button>
     </div>

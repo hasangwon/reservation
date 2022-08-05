@@ -55,10 +55,12 @@ export default function Home() {
 
   return (
     <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem]">
-      <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
-      <div className="ml-20 w-full h-full">
+      <div className={'w-[25rem]'}>
+        <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      </div>
+      <div className="ml-20 flex-1 h-full">
         <CalendarContainer />
-  </div>
+      </div>
     </div>
   );
 }
