@@ -7,7 +7,7 @@ import CalendarContainer from "../components/CalendarContainer";
 
 export default function Home() {
   return (
-    <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem]">
+    <div className="flex bg-secondary-normal w-screen h-screen p-[3.5rem] overflow-x-scroll">
       <Aside />
       <div className="ml-10 h-full">
         <CalendarContainer />

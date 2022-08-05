@@ -18,8 +18,8 @@ const CalendarContainer = () => {
   let thu = startDay.add(4, "day");
   let fri = startDay.add(5, "day");
   let sat = startDay.add(6, "day");
-  const [days, setDays] = useState([sun, mon, tue, wed, thu, fri, sat]);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [days, setDays] = useState<{}[]>([sun, mon, tue, wed, thu, fri, sat]);
+  const [selectedDate, setSelectedDate] = useState<string>("");
 
   const clickTodayButton = () => {
     setSelectedDate(today.format("YYYY-MM-DD"));
