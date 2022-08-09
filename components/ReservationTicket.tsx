@@ -20,7 +20,7 @@ export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
       {/* 예약 강아지/고양이 정보 */}
       <div className="flex items-center">
         <span className={`${typeSetting.color} mr-4 rounded-md px-[0.5rem] py-[0.3125rem] text-[0.8125rem]`}>{typeSetting.type}</span>
-        <div className="inline-block w-6 mt-[0.6rem] mr-[0.7rem]">{doc.animal === "dog" ? <Image src={Dog} alt="dog" /> : <Image src={Cat} alt="cat" />}</div>
+        <div className="inline-block w-6 mt-[0.6rem] mr-[0.7rem]">{doc.animal === 0 ? <Image src={Dog} alt="dog" /> : <Image src={Cat} alt="cat" />}</div>
         <span className="text-[1rem] font-normal">{doc.pet_name}</span>
       </div>
 
