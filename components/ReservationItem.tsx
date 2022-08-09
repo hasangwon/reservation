@@ -3,25 +3,27 @@ import { useEffect, useState } from "react";
 const ReservationItem = ({
   id,
   petName,
-  purpose,
+  purposeType,
 }: {
-  id: number;
+  id: string;
   petName: string;
-  purpose: string;
+  purposeType: string;
 }) => {
   const [backgroundColor, setBackgroundColor] = useState("");
 
   useEffect(() => {
-    if (purpose === "진료 예약") {
+    if (purposeType === "consulting") {
       setBackgroundColor("bg-[#ffe0aa]");
-    } else if (purpose === "수술 예약") {
+    } else if (purposeType === "operation") {
       setBackgroundColor("bg-[#ffd0d0]");
-    } else if (purpose === "미용 예약") {
+    } else if (purposeType === "beauty") {
       setBackgroundColor("bg-[#eadefd]");
-    } else if (purpose === "기타 예약") {
+    } else if (purposeType === "vaccine") {
+      setBackgroundColor("bg-[#cdf2c8]")
+    } else if (purposeType === "etc") {
       setBackgroundColor("bg-[#e9e9f0]");
     }
-  }, [purpose]);
+  }, [purposeType]);
 
   return (
     <div

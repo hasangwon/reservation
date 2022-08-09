@@ -35,7 +35,7 @@ export interface TestType {
 export default function Home() {
   const [selectedDate, setSelectedDate] = useState(dayjs().format("YYYY-MM-DD"));
   const [dailyData, setDailyData] = useState<DailyDataType[]>([]);
-  const [test, setTest] = useState<CalendarEventType>();
+  const [calendarEvent, setCalendarEvent] = useState<CalendarEventType>({});
 
   // 여기서 기준일에 따라 Firebase DailyData를 뽑아와야 함
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function Home() {
 
       return acc;
     }, {});
-    setTest(filteredData);
+    setCalendarEvent(filteredData);
   }, []);
 
   return (
@@ -72,7 +72,7 @@ export default function Home() {
         <Aside dailyData={dailyData} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       </div>
       <div className="ml-20 flex-1 h-full">
-        <CalendarContainer />
+        <CalendarContainer events={calendarEvent}/>
       </div>
     </div>
   );
