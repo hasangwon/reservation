@@ -8,7 +8,7 @@ export interface DailyDataType {
   id: number;
   type: string;
   pet_name: string;
-  animal: string;
+  animal: number;
   visit_date: string;
   visit_time: string;
   owner_name: string;
@@ -18,13 +18,12 @@ export interface DailyDataType {
 export interface TestType {
   createdDate: number;
   eventDate: number;
-  familyInfo: { name: string; phone: string };
+  familyInfo: { name: string; phoneNumber: string };
   hospitalInfo: { name: string; address: string };
-  petInfo: { pet_name: string; animal: string };
+  petInfo: { name: string; type: number };
   key: number;
   cycleKey: number;
-  category: string;
-  type: string;
+  purposeType: string;
   status: string;
   chiefComplaint: string;
   requester: string;
@@ -34,14 +33,21 @@ export interface TestType {
 }
 
 export default function Home() {
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(dayjs().format("YYYY-MM-DD"));
   const [dailyData, setDailyData] = useState<DailyDataType[]>([]);
   const [calendarEvent, setCalendarEvent] = useState<CalendarEventType>({});
 
   // 여기서 기준일에 따라 Firebase DailyData를 뽑아와야 함
   useEffect(() => {
     setDailyData([]);
-    DAILY_DATA.forEach((doc) => setDailyData((ticket) => [...ticket, doc]));
+    REAL_DATA.forEach((doc) => {
+      if (dayjs(doc.eventDate).format("YYYY-MM-DD") === selectedDate) {
+        setDailyData((ticket) => [
+          ...ticket,
+          { id: doc.key, type: doc.purposeType, pet_name: doc.petInfo.name, animal: doc.petInfo.type, visit_date: dayjs(doc.eventDate).format("YYYY-MM-DD"), visit_time: dayjs(doc.eventDate).format("HH:00"), owner_name: doc.familyInfo.name, owner_phone: doc.familyInfo.phoneNumber },
+        ]);
+      }
+    });
   }, [selectedDate]);
 
   useEffect(() => {
@@ -72,30 +78,17 @@ export default function Home() {
   );
 }
 
-const DAILY_DATA: DailyDataType[] = [
-  { id: 1, type: "consulting", pet_name: "크림", animal: "dog", visit_date: "2022.08.02", visit_time: "07:00", owner_name: "하상원", owner_phone: "01098743299" },
-
-  { id: 2, type: "vaccine", pet_name: "우유", animal: "cat", visit_date: "2022.08.02", visit_time: "09:00", owner_name: "우혜림", owner_phone: "01042311323" },
-
-  { id: 3, type: "beauty", pet_name: "당근", animal: "cat", visit_date: "2022.08.02", visit_time: "11:00", owner_name: "이범석", owner_phone: "01014536345" },
-
-  { id: 4, type: "operation", pet_name: "튀김", animal: "dog", visit_date: "2022.08.02", visit_time: "14:00", owner_name: "조현우", owner_phone: "01023422343" },
-
-  { id: 5, type: "etc", pet_name: "고로케", animal: "dog", visit_date: "2022.08.02", visit_time: "19:00", owner_name: "박상우", owner_phone: "01067223299" },
-];
-
 //8/5,8/5,8/9,8/6,8/8,8/9
 const REAL_DATA: TestType[] = [
   {
     createdDate: 1659681393471,
     eventDate: 1659681493472,
-    familyInfo: { name: "하상원", phone: "01098743299" },
+    familyInfo: { name: "하상원", phoneNumber: "01098743299" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "크림", animal: "dog" },
+    petInfo: { name: "크림", type: 0 },
     key: 1,
     cycleKey: 1,
-    category: "reservation",
-    type: "consulting",
+    purposeType: "consulting",
     status: "confirm",
     chiefComplaint: "밥을 잘 드세요",
     requester: "하상원",
@@ -107,31 +100,27 @@ const REAL_DATA: TestType[] = [
   {
     createdDate: 1659681393471,
     eventDate: 1659681493472,
-    familyInfo: { name: "하상원2", phone: "01098743299" },
+    familyInfo: { name: "하상원2", phoneNumber: "01098743299" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "크림2", animal: "dog" },
-    key: 1,
-    cycleKey: 1,
-    category: "reservation",
-    type: "consulting",
+    petInfo: { name: "크림2", type: 0 },
+    key: 2,
+    cycleKey: 2,
+    purposeType: "consulting",
     status: "confirm",
     chiefComplaint: "밥을 잘 드세요",
     requester: "하상원2",
-    // 보호자 || 병원
     message: "개가 다리를 절어요",
     vetFluxUserInfo: "",
-    // 7일 구한 그 스케줄 기준으로 가져와서 [] {날짜 : 시간 : [] 으로 저장 }
   },
   {
     createdDate: 1659681393671,
     eventDate: 1659982453472,
-    familyInfo: { name: "우혜림", phone: "01030953414" },
+    familyInfo: { name: "우혜림", phoneNumber: "01030953414" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "우유", animal: "cat" },
-    key: 2,
-    cycleKey: 2,
-    category: "reservation",
-    type: "vaccine",
+    petInfo: { name: "우유", type: 1 },
+    key: 3,
+    cycleKey: 3,
+    purposeType: "vaccine",
     status: "confirm",
     chiefComplaint: "약을 드세요",
     requester: "우혜림",
@@ -141,13 +130,12 @@ const REAL_DATA: TestType[] = [
   {
     createdDate: 1659681393471,
     eventDate: 1659791499999,
-    familyInfo: { name: "이범석", phone: "01055495824" },
+    familyInfo: { name: "이범석", phoneNumber: "01055495824" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "우식", animal: "cat" },
-    key: 3,
-    cycleKey: 3,
-    category: "reservation",
-    type: "beauty",
+    petInfo: { name: "우식", type: 1 },
+    key: 4,
+    cycleKey: 4,
+    purposeType: "beauty",
     status: "confirm",
     chiefComplaint: "잘 말려주세요",
     requester: "이범석",
@@ -157,13 +145,12 @@ const REAL_DATA: TestType[] = [
   {
     createdDate: 1659945762631,
     eventDate: 1659945762631,
-    familyInfo: { name: "조현우", phone: "01012345678" },
+    familyInfo: { name: "조현우", phoneNumber: "01012345678" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "유주", animal: "cat" },
-    key: 4,
-    cycleKey: 4,
-    category: "reservation",
-    type: "beauty",
+    petInfo: { name: "유주", type: 1 },
+    key: 5,
+    cycleKey: 5,
+    purposeType: "beauty",
     status: "confirm",
     chiefComplaint: "염색은 안됩니다",
     requester: "이범석",
@@ -173,13 +160,12 @@ const REAL_DATA: TestType[] = [
   {
     createdDate: 1659945762631,
     eventDate: 1660045762631,
-    familyInfo: { name: "김보미", phone: "01098776541" },
+    familyInfo: { name: "김보미", phoneNumber: "01098776541" },
     hospitalInfo: { name: "vetflux", address: "역삼역" },
-    petInfo: { pet_name: "류광", animal: "dog" },
-    key: 5,
-    cycleKey: 5,
-    category: "reservation",
-    type: "vaccine",
+    petInfo: { name: "류광", type: 0 },
+    key: 6,
+    cycleKey: 6,
+    purposeType: "vaccine",
     status: "confirm",
     chiefComplaint: "아프겠네요",
     requester: "김보미",
