@@ -1,4 +1,4 @@
-import Calendar from "./Calendar";
+import Calendar, {CalendarEventType} from "./Calendar";
 import Header from "./Header";
 import dayjs, {Dayjs} from "dayjs";
 import Image from "next/image";
@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import ReservationItem from "./ReservationItem";
-
-const CalendarContainer = () => {
+interface CalendarContainerPropsType {
+  events: CalendarEventType;
+}
+const CalendarContainer = ( {events}: CalendarContainerPropsType) => {
   let today = dayjs();
   let todayNumber = dayjs().get("day");
   let startDay = today.subtract(todayNumber, "day");
@@ -45,6 +47,7 @@ const CalendarContainer = () => {
         days={days}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
+        events={events}
       />
     </div>
   );

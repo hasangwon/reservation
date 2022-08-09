@@ -8,13 +8,14 @@ interface propsType {
   days: Dayjs[];
   selectedDate: string;
   setSelectedDate: any;
+  events: CalendarEventType;
 }
 
 export interface CalendarEventType {
   [index: string]: any;
 }
 
-const Calendar = ({ today, days, selectedDate, setSelectedDate }: propsType) => {
+const Calendar = ({ today, days, selectedDate, setSelectedDate, events }: propsType) => {
   const [thisDate, setThisDate] = useState(today);
   const [purpose, setPurpose] = useState([]);
 
@@ -62,7 +63,7 @@ const Calendar = ({ today, days, selectedDate, setSelectedDate }: propsType) => 
                   {days.map((day, i) => {
                     return (
                       <th className="border-solid border-[#e9e9f0] border-l border-t f" key={i}>
-                        <ReservationContainer day={day} time={time} />
+                        <ReservationContainer events={events[day.format('YYYY-MM-DD')] ? events[day.format('YYYY-MM-DD')][time.time] : []}/>
                       </th>
                     );
                   })}
