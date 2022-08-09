@@ -1,4 +1,4 @@
-import dayjs, {Dayjs} from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useEffect, useState } from "react";
 
 import ReservationContainer from "./ReservationContainer";
@@ -10,12 +10,11 @@ interface propsType {
   setSelectedDate: any;
 }
 
-const Calendar = ({
-  today,
-  days,
-  selectedDate,
-  setSelectedDate,
-}: propsType) => {
+export interface CalendarEventType {
+  [index: string]: any;
+}
+
+const Calendar = ({ today, days, selectedDate, setSelectedDate }: propsType) => {
   const [thisDate, setThisDate] = useState(today);
   const [purpose, setPurpose] = useState([]);
 
@@ -35,32 +34,9 @@ const Calendar = ({
                       setSelectedDate(day.format("YYYY-MM-DD"));
                     }}
                   >
-                    <button
-                      value={index}
-                      className={
-                        selectedDate === day.format("YYYY-MM-DD")
-                          ? "w-[3.25rem] h-[1.625rem] bg-[#6c5ce7] rounded-[0.313rem] mt-2"
-                          : "mt-2 h-[1.625rem]"
-                      }
-                    >
-                      <span
-                        className={
-                          selectedDate === day.format("YYYY-MM-DD")
-                            ? "mr-2 text-sm text-white"
-                            : "mr-2 text-sm text-[#4d4f5c]"
-                        }
-                      >
-                        {day.get("date")}
-                      </span>
-                      <span
-                        className={
-                          selectedDate === day.format("YYYY-MM-DD")
-                            ? "text-white font-normal text-sm"
-                            : "text-[#b0aebc] font-normal text-sm"
-                        }
-                      >
-                        {DAYS[index].day}
-                      </span>
+                    <button value={index} className={selectedDate === day.format("YYYY-MM-DD") ? "w-[3.25rem] h-[1.625rem] bg-[#6c5ce7] rounded-[0.313rem] mt-2" : "mt-2 h-[1.625rem]"}>
+                      <span className={selectedDate === day.format("YYYY-MM-DD") ? "mr-2 text-sm text-white" : "mr-2 text-sm text-[#4d4f5c]"}>{day.get("date")}</span>
+                      <span className={selectedDate === day.format("YYYY-MM-DD") ? "text-white font-normal text-sm" : "text-[#b0aebc] font-normal text-sm"}>{DAYS[index].day}</span>
                     </button>
                     {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
                       <div className="relative">
@@ -82,15 +58,10 @@ const Calendar = ({
             {TIME.map((time) => {
               return (
                 <tr key={time.id}>
-                  <th className="w-[5%] font-normal text-[0.625rem] text-[#808495] align-top h-[5rem]">
-                    {time.time}
-                  </th>
+                  <th className="w-[5%] font-normal text-[0.625rem] text-[#808495] align-top h-[5rem]">{time.time}</th>
                   {days.map((day, i) => {
                     return (
-                      <th
-                        className="border-solid border-[#e9e9f0] border-l border-t f"
-                        key={i}
-                      >
+                      <th className="border-solid border-[#e9e9f0] border-l border-t f" key={i}>
                         <ReservationContainer day={day} time={time} />
                       </th>
                     );

@@ -2,7 +2,7 @@ import { prototype } from "stream";
 import ReservationItem from "./ReservationItem";
 import { useEffect } from "react";
 import { ImageError } from "next/dist/server/image-optimizer";
-import {Dayjs} from "dayjs";
+import { Dayjs } from "dayjs";
 
 interface propsType {
   day: Dayjs;
@@ -21,41 +21,16 @@ const ReservationContainer = ({ day, time }: propsType) => {
   return (
     <div className="flex justify-between w-full h-full p-2">
       <div className="flex h-[3.75rem] flex-wrap items-start">
-        {RESERVATION.map(
-          (res: {
-            id: number;
-            time: string;
-            date: string;
-            pet_name: string;
-            purpose: string;
-          }) => {
-            if (
-              res.date === day.format("YYYY-MM-DD") &&
-              res.time === time.time
-            ) {
-              arr.push(res);
-              if (arr.length < 4) {
-                return (
-                  <ReservationItem
-                    purpose={res.purpose}
-                    id={res.id}
-                    petName={res.pet_name}
-                  />
-                );
-              }
+        {RESERVATION.map((res: { id: number; time: string; date: string; pet_name: string; purpose: string }) => {
+          if (res.date === day.format("YYYY-MM-DD") && res.time === time.time) {
+            arr.push(res);
+            if (arr.length < 4) {
+              return <ReservationItem key={res.id} purpose={res.purpose} id={res.id} petName={res.pet_name} />;
             }
           }
-        )}
+        })}
       </div>
-      <div className="flex">
-        {arr.length > 3 ? (
-          <div className="w-6 h-4 mt-auto text-[0.625rem] text-[#808495] font-normal">
-            +{arr.length - 3}
-          </div>
-        ) : (
-          ""
-        )}
-      </div>
+      <div className="flex">{arr.length > 3 ? <div className="w-6 h-4 mt-auto text-[0.625rem] text-[#808495] font-normal">+{arr.length - 3}</div> : ""}</div>
     </div>
   );
 };
