@@ -3,27 +3,27 @@ import { useEffect, useState } from "react";
 const ReservationItem = ({
   id,
   petName,
-  purpose,
+  purposeType,
 }: {
   id: string;
   petName: string;
-  purpose: string;
+  purposeType: string;
 }) => {
   const [backgroundColor, setBackgroundColor] = useState("");
 
   useEffect(() => {
-    if (purpose === "consulting") {
+    if (purposeType === "consulting") {
       setBackgroundColor("bg-[#ffe0aa]");
-    } else if (purpose === "operation") {
+    } else if (purposeType === "operation") {
       setBackgroundColor("bg-[#ffd0d0]");
-    } else if (purpose === "beauty") {
+    } else if (purposeType === "beauty") {
       setBackgroundColor("bg-[#eadefd]");
-    } else if (purpose === "vaccine") {
+    } else if (purposeType === "vaccine") {
       setBackgroundColor("bg-[#cdf2c8]")
-    } else if (purpose === "etc") {
+    } else if (purposeType === "etc") {
       setBackgroundColor("bg-[#e9e9f0]");
     }
-  }, [purpose]);
+  }, [purposeType]);
 
   return (
     <div

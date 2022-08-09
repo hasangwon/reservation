@@ -13,9 +13,8 @@ const ReservationContainer = ({ events }: propsType) => {
     <div className="flex justify-between w-full h-full p-2">
       <div className="flex h-[3.75rem] flex-wrap items-start">
         {events && events.map((event, index) => {
-            console.log('eeeee', event.toString())
           if (index < 4) {
-            return <ReservationItem key={index} id={event.key} purpose={event.purposeType} petName={event.petInfo.pet_name} />;
+            return <ReservationItem key={index} id={event.key} purposeType={event.purposeType} petName={event.petInfo.name} />;
           }
         })}
       </div>
