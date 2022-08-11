@@ -1,10 +1,7 @@
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState } from "react";
-
 import ReservationContainer from "./ReservationContainer";
 
 interface propsType {
-  today: Dayjs;
   days: Dayjs[];
   selectedDate: string;
   setSelectedDate: any;
@@ -15,10 +12,7 @@ export interface CalendarEventType {
   [index: string]: any;
 }
 
-const Calendar = ({ today, days, selectedDate, setSelectedDate, events }: propsType) => {
-  const [thisDate, setThisDate] = useState(today);
-  const [purpose, setPurpose] = useState([]);
-
+const Calendar = ({ days, selectedDate, setSelectedDate, events }: propsType) => {
   return (
     <div className="shadow-md rounded-2xl w-full h-full bg-white flex flex-col overflow-y-scroll">
       <div className="h-full">
@@ -39,7 +33,7 @@ const Calendar = ({ today, days, selectedDate, setSelectedDate, events }: propsT
                       <span className={selectedDate === day.format("YYYY-MM-DD") ? "mr-2 text-sm text-white" : "mr-2 text-sm text-[#4d4f5c]"}>{day.get("date")}</span>
                       <span className={selectedDate === day.format("YYYY-MM-DD") ? "text-white font-normal text-sm" : "text-[#b0aebc] font-normal text-sm"}>{DAYS[index].day}</span>
                     </button>
-                    {today.format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
+                    {dayjs().format("YYYY.MM.DD") === day.format("YYYY.MM.DD") ? (
                       <div className="relative">
                         <div className="w-full absolute top-[1.7rem]">
                           <div className="text-xs text-[#6c5ce7]">Today</div>
@@ -63,7 +57,7 @@ const Calendar = ({ today, days, selectedDate, setSelectedDate, events }: propsT
                   {days.map((day, i) => {
                     return (
                       <th className="border-solid border-[#e9e9f0] border-l border-t f" key={i}>
-                        <ReservationContainer events={events[day.format('YYYY-MM-DD')] ? events[day.format('YYYY-MM-DD')][time.time] : []}/>
+                        <ReservationContainer events={events[day.format("YYYY-MM-DD")] ? events[day.format("YYYY-MM-DD")][time.time] : []} />
                       </th>
                     );
                   })}

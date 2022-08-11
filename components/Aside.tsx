@@ -46,7 +46,7 @@ export default function Aside({ dailyData, selectedDate, setSelectedDate }: Asid
             <Image src={Down} alt="down" />
           </span>
         </div>
-        {isOpenPicker && <VetfluxDatePicker datePickRangeOptions="normal" handleDatePickerCancel={handleDatePickerCancel} handleDateData={handleDateData} className={className} defaultTime={defaultTime} />}
+        {isOpenPicker && <VetfluxDatePicker datePickRangeOptions="normal" handleDatePickerCancel={handleDatePickerCancel} handleDateData={handleDateData} className={className} defaultTime={dayjs(selectedDate).valueOf()} />}
       </div>
 
       {/* 예약 티켓 공간 */}
