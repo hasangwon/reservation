@@ -14,7 +14,7 @@ interface VetfluxDatePickerPropsType {
   className: string;
   defaultTime: number;
 }
-const VetfluxDatePicker = ({ handleDateData, handleDatePickerCancel, datePickRangeOptions, className = "top-auto left-auto", defaultTime = dayjs().valueOf() }: VetfluxDatePickerPropsType) => {
+const VetfluxDatePicker = ({ handleDateData, handleDatePickerCancel, datePickRangeOptions, className = "top-auto left-auto", defaultTime }: VetfluxDatePickerPropsType) => {
   dayjs.extend(toObject);
   dayjs.extend(calendar);
   dayjs.extend(weekday);
@@ -220,7 +220,7 @@ const VetfluxDatePicker = ({ handleDateData, handleDatePickerCancel, datePickRan
                     >
                       <p
                         className={
-                          "dark:text-gray-100 group-hover:text-white text-sm " +
+                          "dark:text-gray-100 hover:text-white text-sm " +
                           (dayjs(`${selectedDate.years}-${selectedDate.months + 1}-${selectedDate.date}`).isSame(dayjs(`${cellDate.years}-${cellDate.months + 1}-${cellDate.date}`)) ? "text-white" : selectedDate.months === cellDate.months ? "text-trout" : "text-gray-300")
                         }
                       >

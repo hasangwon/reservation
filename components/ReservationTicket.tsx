@@ -4,15 +4,50 @@ import Dog from "../public/images/dog.png";
 import Cat from "../public/images/cat.png";
 import Delete from "../public/images/delete.png";
 import { DailyDataType } from "../pages";
+import ReservationModal from "./ReservationModal";
+import DeleteModal from "./DeleteModal";
+import { firestore } from "./Firestore";
 
 export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
   const [typeSetting, setTypeSetting] = useState({ color: "", type: "" });
+  const [isModalOpen, setIsModalOpen] = useState({ reservation: false, delete: false });
+
+  const getPurposeType = (type: string) => {
+    if (type === "beauty") setTypeSetting({ color: "bg-[#eadefd]", type: "미용 예약" });
+    else if (type === "vaccine") setTypeSetting({ color: "bg-[#cdf2c8]", type: "접종 예약" });
+    else if (type === "operation") setTypeSetting({ color: "bg-[#ffd0d0]", type: "수술 예약" });
+    else if (type === "consulting") setTypeSetting({ color: "bg-[#ffe0aa]", type: "진료 예약" });
+    else if (type === "etc") setTypeSetting({ color: "bg-secondary-dark", type: "기타 예약" });
+  };
+
+  const onNextClick = (value: { eventDate: number; message: string; purposeType: string }) => {
+    onCancelClick();
+
+    let purposeEn = "";
+    if (value.purposeType === "진료") purposeEn = "consulting";
+    else if (value.purposeType === "수술") purposeEn = "operation";
+    else if (value.purposeType === "접종") purposeEn = "vaccine";
+    else if (value.purposeType === "미용") purposeEn = "beauty";
+    else if (value.purposeType === "기타") purposeEn = "etc";
+
+    const updateDoc = firestore.collection("hospital").doc("8owQXXXfuCJnix7uSkqr").collection("Reservation").doc(doc.id);
+    return updateDoc.update({
+      eventDate: value.eventDate,
+      message: value.message,
+      purposeType: purposeEn,
+    });
+  };
+
+  const onDeleteClick = () => {
+    firestore.collection("hospital").doc("8owQXXXfuCJnix7uSkqr").collection("Reservation").doc(doc.id).delete();
+  };
+
+  const onCancelClick = () => {
+    setIsModalOpen({ reservation: false, delete: false });
+  };
+
   useEffect(() => {
-    if (doc.type === "beauty") setTypeSetting({ color: "bg-[#eadefd]", type: "미용 예약" });
-    else if (doc.type === "vaccine") setTypeSetting({ color: "bg-[#cdf2c8]", type: "접종 예약" });
-    else if (doc.type === "operation") setTypeSetting({ color: "bg-[#ffd0d0]", type: "수술 예약" });
-    else if (doc.type === "consulting") setTypeSetting({ color: "bg-[#ffe0aa]", type: "진료 예약" });
-    else if (doc.type === "etc") setTypeSetting({ color: "bg-secondary-dark", type: "기타 예약" });
+    getPurposeType(doc.type);
   }, [doc.type]);
 
   return (
@@ -42,15 +77,17 @@ export default function ReservationTicket({ doc }: { doc: DailyDataType }) {
         <div className="flex-1" />
 
         {/* 예약 변경 버튼 */}
-        <div className="right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem] select-none" onClick={() => alert(doc.id)}>
+        <div className="right-1 bottom-[1rem] py-[0.625rem] px-[0.8125rem] text-[0.75rem] text-primary border border-primary rounded-[1.25rem] select-none cursor-pointer" onClick={() => setIsModalOpen({ reservation: true, delete: false })}>
           예약 변경
         </div>
       </div>
+      {isModalOpen.reservation && <ReservationModal messageTemplate="기본 메세지" onNextClick={onNextClick} onCancelClick={onCancelClick} doc={doc} typeSetting={typeSetting} />}
 
       {/* 예약 삭제 버튼 */}
-      <div className="absolute top-6 right-7 hidden group-hover:block w-4 h-auto">
+      <div className="absolute top-6 right-7 hidden group-hover:block w-4 h-auto cursor-pointer" onClick={() => setIsModalOpen({ reservation: false, delete: true })}>
         <Image src={Delete} alt="delete" />
       </div>
+      {isModalOpen.delete && <DeleteModal onDeleteClick={onDeleteClick} onCancelClick={onCancelClick} doc={doc} typeSetting={typeSetting} />}
     </div>
   );
 }
