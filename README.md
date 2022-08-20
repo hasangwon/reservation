@@ -1,6 +1,6 @@
 ### 늘펫 플러스 예약판 페이지 구현 
 - 벳플럭스 인턴십 기간 중 약 2주간 진행한 2인 팀 프로젝트로, 노션을 이용하여 개발 기획, 일정 산정, 로직 구상을 하고 React, NextJS, typescript 환경에서 프로젝트를 진행했습니다.
-- 팀원 : [조예지](https://github.com/Dumibell):캘린더, [하상원](https://github.com/hasangwon):예약 리스트
+- 팀원 : [조예지](https://github.com/Dumibell)(캘린더 구현), [하상원](https://github.com/hasangwon)(예약 리스트 구현)
 <br/>
 - 개발 테스크 정리 : 처음에 해야할 일들을 세분화하여 작성했습니다
 <img width="300" alt="스크린샷 2022-08-20 오후 8 47 45" src="https://user-images.githubusercontent.com/75872687/185744645-f9c3b205-f012-49a9-8903-5d887427290c.png">
