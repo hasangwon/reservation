@@ -23,6 +23,9 @@
 <img width="1000" alt="스크린샷 2022-08-20 오후 8 30 06" src="https://user-images.githubusercontent.com/75872687/185744065-3d865f8e-6c05-4d00-ba24-76d4a495009b.png">
 
 ## 시연 영상
-[화면_기록_2022-08-20_오후_8_31_30_AdobeExpress](https://user-images.githubusercontent.com/75872687/185745033-e1519d70-58de-47ab-a0db-34cee7617328.gif)
+
+
+
+https://user-images.githubusercontent.com/75872687/185745097-4cebfba9-5037-41ec-916c-d62187cf5d3e.mov
 
 
