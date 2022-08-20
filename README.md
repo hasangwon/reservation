@@ -1,34 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img width="1507" alt="스크린샷 2022-08-20 오후 8 29 18" src="https://user-images.githubusercontent.com/75872687/185744019-25e08f47-5457-4382-9ff8-a75295329127.png">
+<img width="367" alt="스크린샷 2022-08-20 오후 8 29 32" src="https://user-images.githubusercontent.com/75872687/185744060-669a383c-14a0-43d2-8ee3-bd3141954204.png">
+![스크린샷 2022-08-20 오후 8 29 48](https://user-images.githubusercontent.com/75872687/185744063-554b6adb-070f-4be9-9e24-3b13d1e8939c.png)
+<img width="1506" alt="스크린샷 2022-08-20 오후 8 30 06" src="https://user-images.githubusercontent.com/75872687/185744065-3d865f8e-6c05-4d00-ba24-76d4a495009b.png">
+![화면_기록_2022-08-20_오후_8_31_30_AdobeExpress](https://user-images.githubusercontent.com/75872687/185744092-d42e53ad-988e-4e80-9196-96c96df6f1c3.gif)
