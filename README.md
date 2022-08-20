@@ -5,7 +5,7 @@
 <br/>
 ## 개발 테스크 정리 : 처음에 해야할 일들을 세분화하여 작성했습니다
 <img width="300" alt="스크린샷 2022-08-20 오후 8 47 45" src="https://user-images.githubusercontent.com/75872687/185744645-f9c3b205-f012-49a9-8903-5d887427290c.png">
-<img width="700" alt="스크린샷 2022-08-20 오후 8 47 52" src="https://user-images.githubusercontent.com/75872687/185744650-c816ff00-adb6-4ef8-8f64-daeb7a08f9a6.png">
+<img width="300" alt="스크린샷 2022-08-20 오후 8 47 52" src="https://user-images.githubusercontent.com/75872687/185744650-c816ff00-adb6-4ef8-8f64-daeb7a08f9a6.png">
 <br/>
 ## 일정 예상 : 우선 순위를 협의하고 개발 일정을 예상하여 표를 작성했습니다.
 <img width="1000" alt="스크린샷 2022-08-20 오후 8 48 23" src="https://user-images.githubusercontent.com/75872687/185744653-cea03c67-e263-43f0-942a-eeca65bb8602.png">
@@ -23,9 +23,6 @@
 <img width="1000" alt="스크린샷 2022-08-20 오후 8 30 06" src="https://user-images.githubusercontent.com/75872687/185744065-3d865f8e-6c05-4d00-ba24-76d4a495009b.png">
 
 ## 시연 영상
-
-
-
 https://user-images.githubusercontent.com/75872687/185745097-4cebfba9-5037-41ec-916c-d62187cf5d3e.mov
 
 
